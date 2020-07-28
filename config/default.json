@@ -1,0 +1,6 @@
+{
+  "mongoURL": "mongodb+srv://bonlover:bonlover767@yunsdev.bjb32.mongodb.net/demo?retryWrites=true&w=majority",
+  "jwtSecret": "myJsonWebSecretToken",
+  "githubClientId": "b166b6cdb0da1a296c6b",
+  "githubClientSecret": "a159425dd18d9743e546be513d3df1e01df084c1"
+}
