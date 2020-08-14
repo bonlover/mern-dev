@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
-import { setAlert } from '../../actions/alert';
+// import { setAlert } from '../../actions/alert';
 
 import PropTypes from 'prop-types';
 
@@ -20,7 +20,7 @@ const Login = ({ login, isAuthenticated }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
-    setAlert('Login successful.', 'success');
+    // setAlert('Login successful.', 'success');
     console.log('Success');
   };
 
@@ -50,7 +50,7 @@ const Login = ({ login, isAuthenticated }) => {
             type='password'
             placeholder='Password'
             name='password'
-            minLength='6'
+            minLength='4'
             value={password}
             onChange={(e) => onChange(e)}
             required
@@ -66,12 +66,12 @@ const Login = ({ login, isAuthenticated }) => {
   );
 };
 Login.propTypes = {
-  setAlert: PropTypes.func.isRequired,
+  // setAlert: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 

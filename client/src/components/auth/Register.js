@@ -72,7 +72,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type='password'
             placeholder='Password'
             name='password'
-            minLength='6'
+            minLength='4'
             value={password}
             onChange={(e) => onChange(e)}
             required
@@ -83,7 +83,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type='password'
             placeholder='Confirm Password'
             name='password2'
-            minLength='6'
+            minLength='4'
             value={password2}
             onChange={(e) => onChange(e)}
             required
@@ -104,7 +104,7 @@ Register.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
