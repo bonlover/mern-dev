@@ -30,6 +30,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       register({ name, email, password });
       //msg Alert success
       // setAlert('Successfully Register.', 'success');
+      setFormData('');
     }
   };
   // if Registered redirect to Dashboard

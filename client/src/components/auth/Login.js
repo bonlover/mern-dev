@@ -21,7 +21,7 @@ const Login = ({ login, isAuthenticated }) => {
     e.preventDefault();
     login(email, password);
     // setAlert('Login successful.', 'success');
-    console.log('Success');
+    // console.log('Success');
   };
 
   // Redirect if logged in

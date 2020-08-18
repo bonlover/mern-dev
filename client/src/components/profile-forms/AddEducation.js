@@ -43,6 +43,7 @@ const AddEducation = ({ addEducation, history }) => {
         onSubmit={(e) => {
           e.preventDefault();
           addEducation(formData, history);
+          setFormData('');
         }}
       >
         <div className='form-group'>

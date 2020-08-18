@@ -47,6 +47,9 @@ router.post(
 router.get('/', auth, async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
+    // if (!posts) {
+    //   return res.status(404).json({ msg: 'Posts not found' });
+    // }
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -54,8 +57,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route GET api/posts/:id
-// @desc Get a post by ID
+// @route DELETE api/posts/:id
+// @desc Delete a post by ID
 // @access private
 
 router.delete('/:id', auth, async (req, res) => {
@@ -80,7 +83,7 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-// @route DELETE api/posts/:id
+// @route GET api/posts/:id
 // @desc Get a post by ID
 // @access private
 
@@ -110,7 +113,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
     // Check if the post has already been liked
     if (
-      post.likes.filter(like => like.user.toString() === req.user.id).length >
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
       0
     ) {
       return res.status(400).json({ msg: 'Post already liked' });
@@ -135,7 +138,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
     // Check if the post has already been liked
     if (
-      post.likes.filter(like => like.user.toString() === req.user.id)
+      post.likes.filter((like) => like.user.toString() === req.user.id)
         .length === 0
     ) {
       return res.status(400).json({ msg: 'Post has not yet been liked' });
@@ -143,7 +146,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
     // Get remove index
     const removeIndex = post.likes
-      .map(like => like.user.toString())
+      .map((like) => like.user.toString())
       .indexOf(req.user.id);
     post.likes.splice(removeIndex, 1);
 
@@ -199,7 +202,9 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
     // Pull out comment
     // const comment = post.comments.filter(comment => comment.id === req.params.comment_id);
-    const comment = post.comments.find( comment => comment.id === req.params.comment_id);
+    const comment = post.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
 
     // Check comment is exists or not
     if (!comment) {
@@ -213,14 +218,13 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
     // Get remove index
     const removeIndex = post.comments
-      .map(comment => comment.user.toString())
+      .map((comment) => comment.user.toString())
       .indexOf(req.user.id);
 
     post.comments.splice(removeIndex, 1);
 
     await post.save();
     res.json(post.comments);
-
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Comment not exists.' });
